@@ -66,4 +66,26 @@ class DistanciaControllerTest {
 				.andExpect(jsonPath("$.erro").value("Bad Request"))
 				.andExpect(jsonPath("$.mensagem").value("O CEP da primeira localidade deve ser informado."));
 	}
+	@Test
+	void deveAceitarEndpointAlternativoCepsCoordenadas() throws Exception {
+		when(calcularDistanciaUseCase.executar(any()))
+				.thenReturn(new DistanciaFormatadaResponseDto("5km e 132m", "Distancia calculada com sucesso"));
+
+		mockMvc.perform(post("/ceps/coordenadas")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content("""
+							{
+							  "primeira": {
+							    "cep": "11691024"
+							  },
+							  "segunda": {
+							    "cep": "01001000"
+							  }
+							}
+							"""))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.distancia").value("5km e 132m"))
+				.andExpect(jsonPath("$.mensagem").value("Distancia calculada com sucesso"));
+	}
+
 }

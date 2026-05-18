@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/distancias")
+@RequestMapping({"/distancias", "/ceps"})
 public class DistanciaController {
 
 	private final CalcularDistanciaUseCase calcularDistanciaUseCase;
@@ -19,7 +19,7 @@ public class DistanciaController {
 		this.calcularDistanciaUseCase = calcularDistanciaUseCase;
 	}
 
-	@PostMapping("/ceps")
+	@PostMapping({"/ceps", "/coordenadas"})
 	public ResponseEntity<DistanciaFormatadaResponseDto> calcular(@RequestBody(required = false) DistanciaCepRequestDto request) {
 		return ResponseEntity.ok(calcularDistanciaUseCase.executar(request));
 	}
