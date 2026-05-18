@@ -66,4 +66,5 @@ class DistanciaControllerTest {
 				.andExpect(jsonPath("$.erro").value("Bad Request"))
 				.andExpect(jsonPath("$.mensagem").value("O CEP da primeira localidade deve ser informado."));
 	}
+
 }

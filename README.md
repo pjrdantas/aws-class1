@@ -123,6 +123,38 @@ Se a distancia for menor que mil metros, o retorno fica em metros:
 }
 ```
 
+
+## Exemplo de requisicao e resposta
+
+Exemplo de chamada:
+
+```http
+POST http://localhost:8080/ceps/coordenadas
+Content-Type: application/json
+```
+
+Body:
+
+```json
+{
+  "primeira": {
+    "cep": "11691024"
+  },
+  "segunda": {
+    "cep": "01001000"
+  }
+}
+```
+
+Resposta recebida:
+
+```json
+{
+  "distancia": "157km e 708m",
+  "mensagem": "Distancia calculada com sucesso"
+}
+```
+
 ## Respostas de erro
 
 ### CEP obrigatorio nao informado
