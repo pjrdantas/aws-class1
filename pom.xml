@@ -13,7 +13,7 @@
 	<groupId>com.aws</groupId>
 	<artifactId>class1</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>class3</name>
+	<name>class1</name>
 	<description>Projeto API com Health Check</description>
 	<url/>
 
