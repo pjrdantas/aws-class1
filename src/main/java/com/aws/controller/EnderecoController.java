@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/enderecos")
+@RequestMapping({"/enderecos", "/ceps"})
 public class EnderecoController {
 
 	private final BuscarEnderecoUseCase buscarEnderecoUseCase;
@@ -22,6 +22,13 @@ public class EnderecoController {
 
 	@PostMapping
 	public ResponseEntity<EnderecoResponseDto> buscarEndereco(@RequestBody(required = false) EnderecoRequestDto request) {
+		EnderecoResultadoDto resultado = buscarEnderecoUseCase.executar(request);
+
+		return ResponseEntity.status(resultado.httpStatus()).body(resultado.body());
+	}
+
+	@PostMapping("/coordenadas")
+	public ResponseEntity<EnderecoResponseDto> buscarEnderecoPorCoordenadas(@RequestBody(required = false) EnderecoRequestDto request) {
 		EnderecoResultadoDto resultado = buscarEnderecoUseCase.executar(request);
 
 		return ResponseEntity.status(resultado.httpStatus()).body(resultado.body());

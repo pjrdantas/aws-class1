@@ -18,11 +18,17 @@ public class BuscarEnderecoUseCase {
 	}
 
 	public EnderecoResultadoDto executar(EnderecoRequestDto request) {
-		if (request == null || request.localidade() == null || request.localidade().isBlank()) {
+		if (request == null) {
 			return EnderecoResultadoDto.badRequest("Localidade nao pode estar vazia.");
 		}
 
-		String cep = request.localidade().replaceAll("\\D", "");
+		String cepInformado = request.cepParaConsulta();
+
+		if (cepInformado == null || cepInformado.isBlank()) {
+			return EnderecoResultadoDto.badRequest("Localidade nao pode estar vazia.");
+		}
+
+		String cep = cepInformado.replaceAll("\\D", "");
 
 		if (cep.isBlank()) {
 			return EnderecoResultadoDto.badRequest("Localidade deve conter um CEP valido.");
